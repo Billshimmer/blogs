@@ -1,1 +1,1 @@
-https://shimmer.gitbooks.io/-javascript/content/%E5%85%B3%E4%BA%8Ejavascript%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF.htmlgit 
+https://shimmer.gitbooks.io/-javascript/content/%E5%85%B3%E4%BA%8Ejavascript%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B%E5%84%BF.html
