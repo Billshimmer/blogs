@@ -1,0 +1,9 @@
+.jekyll-metadata
+.htaccess
+.DS_Store
+.sass-cache
+Gemfile.lock
+_site/
+_drafts/
+node_modules
+robots/images
