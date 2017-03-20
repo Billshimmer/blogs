@@ -1,18 +1,18 @@
 
 
 def giveMoney(money, changes):
-    result = [0 for i in range(len(changes))]
+  result = [ 0 for i in range(len(changes))]
 
-    for i in range(0, len(changes)-1, 1):
-        if money > 0 and changes[i] > 0:
-            result[i] = money / changes[i]
-            money = money % changes[i]
+  for i in range(0, len(changes)-1, 1):
 
-        if money == 0:
-            break
+    if changes[i] > 0 and money > 0 :
+      result[i] = money / changes[i]
+      money = money % changes[i]
+    
+    if money == 0 :
+      break
 
-    return result
-
+  return result
 
 money = 99
 changes = [100, 50, 20, 10, 5, 2, 1]
