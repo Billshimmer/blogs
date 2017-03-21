@@ -8,10 +8,15 @@ def downloadPic(html, keyword):
 
     pic_url = re.findall('"objURL":"(.*?)",', html, re.S)
     i = 0
+    imagePath = os.getcwd() + "/images"
+    dirPath = os.getcwd() + "/images/" + keyword
 
     print "找到关键词为" + keyword + "的图片, 现在开始下载图片...."
-    os.mkdir(os.getcwd() + "/images/" + keyword)
-    print "图片存储在当前images目录下对应名子目录下:"
+    print "图片存储在当前images目录下对应子目录下:"
+    if not os.path.exists(imagePath):
+        os.mkdir(os.getcwd() + "/images/")
+    if not os.path.exists(dirPath):
+        os.mkdir(os.getcwd() + "/images/" + keyword)
 
     for item in pic_url:
         print "正在下载第" + str(i + 1) + "张图片, 图片下载地址是" + str(item)
@@ -21,7 +26,8 @@ def downloadPic(html, keyword):
             print "some error happened"
             continue
 
-        string = './images/' + keyword + "/" + str(keyword) + '_' + str(i) + '.jpg'
+        string = './images/' + keyword + "/" + \
+            str(keyword) + '_' + str(i) + '.jpg'
         fp = open(string, 'wb')
         fp.write(pic.content)
         fp.close()
@@ -30,7 +36,9 @@ def downloadPic(html, keyword):
 
 
 if __name__ == '__main__':
-    word = raw_input("input key word for images which you want:")
+    word = ""
+    while not word:
+        word = raw_input("input key word for images which you want:")
     url = "https://image.baidu.com/search/flip?tn=baiduimage&ie=utf-8&word=" + \
         word + "&ct=201326592&v=flip"
     result = requests.get(url)

@@ -14,6 +14,7 @@ def maxSubArray(alist):
     if curSum > maxSum:
       maxSum = curSum
       end_index = i
+      ## remember the max index
       maxSum_start = start_index
       maxSum_end = end_index
   
