@@ -25,9 +25,7 @@ def backPack(n, c, v, w):
     for i in range(0, n, 1):
         for j in range(c, 0, -1):
             if j>=v[i]:
-                print j, v[i]
                 d[j] = max(d[j], d[j - v[i]] + w[i])
-                print d[j]
     return d
 
 
@@ -36,14 +34,14 @@ def show(n, c, v, res):
     print 'maxProfit:', res[n][c]
     x = [False for i in range(n)]
     j = c
-    for i in range(n, 1, -1):
+    for i in range(n, 0, -1):
         if res[i][j] > res[i - 1][j]:
             x[i - 1] = True
             j -= v[i - 1]
     print('choosed:')
     for i in range(n):
         if x[i]:
-            print("bone's index is ", i + 1, ' !,')
+            print("stone's index is ", i, ' !,')
     print('')
 
 
