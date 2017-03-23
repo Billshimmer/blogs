@@ -8,6 +8,8 @@ sys.setdefaultencoding("utf-8")
 
 #  抓取糗事百科热门内容的信息,
 #  逐页抓取,输入enter逐条显示内容,Q退出浏览
+
+
 class QSBK:
     def __init__(self):
         self.pageIndex = 1
@@ -16,7 +18,7 @@ class QSBK:
         self.host = 'www.qiushibaike.com'
         self.stories = []
         self.enable = False
-    
+
     # 指定页数获取页面代码
     def getPage(self, pageIndex):
         try:
@@ -30,7 +32,8 @@ class QSBK:
             if hasattr(e, "reason"):
                 print "糗百连接失败,原因是:", e.reason
                 return None
-    # 分析页面code,匹配选择出自己需要的内容  
+
+    # 分析页面code,匹配选择出自己需要的内容
     def getPageItems(self, pageIndex):
         pageCode = self.getPage(pageIndex)
         if not pageCode:
@@ -45,15 +48,15 @@ class QSBK:
         baikeStories = []
         for item in items:
             one = {
-              'author': item[0],
-              'content': item[1], 
-              'stars': item[2],
-              'comments': item[3],
+                'author': item[0],
+                'content': item[1],
+                'stars': item[2],
+                'comments': item[3],
             }
             baikeStories.append(one)
 
         return baikeStories
-    
+
     def loadPage(self):
         if self.enable == True:
             if len(self.stories) < 2:
@@ -69,7 +72,7 @@ class QSBK:
             if input == 'Q':
                 self.enable = False
                 return
-            print "第%d页\n发布人:%s\n内容:%s\n赞:%s\n评论数:%s" %(page, story['author'], story['content'], story['stars'], story['comments'])
+            print "第%d页\n发布人:%s\n内容:%s\n赞:%s\n评论数:%s" % (page, story['author'], story['content'], story['stars'], story['comments'])
 
     def start(self):
         self.enable = True
@@ -82,6 +85,7 @@ class QSBK:
                 nowPage += 1
                 del self.stories[0]
                 self.getOneStory(pageStories, nowPage)
+
 
 spider = QSBK()
 spider.start()
