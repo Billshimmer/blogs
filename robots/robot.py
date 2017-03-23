@@ -13,7 +13,7 @@ class PD:
         self.page_index = 0
         self.pic_index = 1
         self.keyword = ""
-    
+
     # 获取页面代码
     def getPageCode(self):
         url = URL + str(self.keyword) + "&pn=" + str(self.page_index * 20)
@@ -21,7 +21,7 @@ class PD:
         result = requests.get(url)
 
         return result
-    
+
     # 新建子级目录
     def mkdir(self):
         keyword = self.keyword
@@ -34,17 +34,18 @@ class PD:
             os.mkdir(os.getcwd() + "/images/")
         if not os.path.exists(dirPath):
             os.mkdir(os.getcwd() + "/images/" + keyword)
-    
+
     # 下载图片
     def downloadPic(self, html):
         keyword = self.keyword
         pic_url = re.findall('"objURL":"(.*?)",', html, re.S)
-        self.mkdir()
+        if self.page_index == 1:
+            self.mkdir()
 
         for item in pic_url:
             print "正在下载第" + str(self.pic_index) + "张图片, 图片下载地址是" + str(item)
             try:
-                pic = requests.get(item, timeout=10)
+                pic = requests.get(item, timeout=20)
             except requests.exceptions.ConnectionError:
                 print "some error happened"
                 continue
