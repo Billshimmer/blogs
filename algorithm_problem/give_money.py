@@ -20,4 +20,5 @@ changes = [100, 50, 20, 10, 5, 2, 1]
 result = giveMoney(money, changes)
 
 for i in range(0, len(result), 1):
-    print str(changes[i]) + " have: " + str(result[i]) + " ones"
+    if result[i] > 0:
+      print str(changes[i]) + " have: " + str(result[i]) + " ones"

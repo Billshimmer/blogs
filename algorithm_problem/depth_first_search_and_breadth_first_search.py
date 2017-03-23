@@ -83,7 +83,6 @@ g.add_edge((6, 7))
 print "nodes:", g.nodes()
 
 
-
 g.breadth_first_search(1)
 g.clear_visit()
 g.depth_first_search(1)            
