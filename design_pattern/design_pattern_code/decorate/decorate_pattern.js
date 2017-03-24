@@ -13,7 +13,7 @@ tree.getDecorate = function (decorate) {
 tree.summer = function () {
   this.decorate = function () {
     this.summer.prototype.decorate();
-    this.summer.color = 'green';
+    this.summer.color = 'red';
     console.log('tree in summer, color: ' + this.summer.color);
   }
 }
@@ -21,7 +21,7 @@ tree.summer = function () {
 tree.autumn = function () {
   this.decorate = function () {
     this.autumn.prototype.decorate();
-    this.autumn.color = 'green';
+    this.autumn.color = 'orange';
     console.log('tree in autumn, color: ' + this.autumn.color);
   }
 }
@@ -29,7 +29,7 @@ tree.autumn = function () {
 tree.winter = function () {
   this.decorate = function () {
     this.winter.prototype.decorate();
-    this.winter.color = 'green';
+    this.winter.color = 'grey';
     console.log('tree in winter, color: ' + this.winter.color);
   }
 }
