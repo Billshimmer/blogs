@@ -72,7 +72,13 @@ class QSBK:
             if input == 'Q':
                 self.enable = False
                 return
-            print "第%d页\n发布人:%s\n内容:%s\n赞:%s\n评论数:%s" % (page, story['author'], story['content'], story['stars'], story['comments'])
+            print "第%d页\n发布人:%s\n内容:%s\n赞:%s\n评论数:%s" % (
+                page,
+                story['author'],
+                story['content'],
+                story['stars'],
+                story['comments']
+            )
 
     def start(self):
         self.enable = True

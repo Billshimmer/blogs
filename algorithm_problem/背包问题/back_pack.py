@@ -10,24 +10,23 @@ W = [1, 2, 3, 45, 6, 7]
 
 # 空间复杂度为n*c
 def nbackPack(n, c, v, w):
-    d = [[0 for j in range(c + 1)] for i in range(n + 1)]
+    d = [[0 for j in range(c+1)]for i in range(n+1)]
     for i in range(0, n+1, 1):
         for j in range(0, c+1, 1):
-            d[i][j] = 0 if i == 0 else d[i - 1][j]
-            if i > 0 and j >= v[i - 1]:
-                d[i][j] = max(d[i - 1][j], d[i - 1][j - v[i - 1]] + w[i - 1])
-    return d
+            d[i][j] = 0 if i == 0 else d[i-1][j]
 
+            if i>0 and j>=v[i-1]:
+                d[i][j] = max(d[i-1][j], d[i-1][j-v[i-1]]+w[i-1])
+    return d
 
 # 空间复杂度为n
 def backPack(n, c, v, w):
-    d = [ 0 for i in range(c + 1)]
-    for i in range(0, n, 1):
+    d = [0 for j in range(c+1)]
+    for i in range(0, n+1, 1):
         for j in range(c, 0, -1):
-            if j>=v[i]:
-                d[j] = max(d[j], d[j - v[i]] + w[i])
+            if j>=v[i-1]:
+                d[j] = max(d[j], d[j-v[i-1]]+w[i-1])
     return d
-
 
 
 def show(n, c, v, res):
@@ -41,11 +40,13 @@ def show(n, c, v, res):
     print('choosed:')
     for i in range(n):
         if x[i]:
-            print("stone's index is ", i, ' !,')
+            print("stone's index is ", str(i), ' !,')
     print('')
 
 
-result = nbackPack(6, 10, V, W)
+result1 = nbackPack(6, 10, V, W)
+print result1
+show(6, 10, V, result1)
 
-print result
-show(6, 10, V, result)
+result2 = backPack(6, 10, V, W)
+print result2

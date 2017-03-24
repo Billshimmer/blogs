@@ -68,7 +68,7 @@ class PD:
         while self.enable == True:
             pageCode = self.getPageCode()
             self.downloadPic(pageCode.text)
-            user_input = raw_input("Enter for next page OR Q for exit:")
+            user_input = raw_input("Enter下载下一页图片 OR Q退出下载:")
             if user_input == 'Q':
                 self.enable = False
 
