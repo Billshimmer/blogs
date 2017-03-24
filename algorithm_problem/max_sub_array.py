@@ -1,4 +1,6 @@
 
+# 连续子序列的最大值
+
 def maxSubArray(alist):
   curSum = 0 
   maxSum = 0 

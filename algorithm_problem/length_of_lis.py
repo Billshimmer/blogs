@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: latin-1 -*-
+# 最长上升子序列
 
 def lengthOfLIS(nums):
     tails = [0] * len(nums)
