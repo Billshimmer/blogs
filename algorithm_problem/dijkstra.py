@@ -22,22 +22,19 @@ path = dict()
 
 
 def probe(snode, enode):
-    if snode == enode:
-        return
+    if snode == enode: return
     stack.append(snode)
 
-    for i in range(1, maxCount + 1, 1):
+    for i in range(1, maxCount+1, 1):
         if (snode, i) in distance.keys() and i not in stack:
-            if dist.get(snode, 0) + distance[(snode, i)] < dist.get(i, 1000):
-                dist[i] = dist.get(snode, 0) + distance[(snode, i)]
+            if dist.get(snode, 0)+distance[(snode, i)]<dist.get(i,1000):
+                dist[i] = dist.get(snode, 0)+distance[(snode, i)]
                 path[i] = snode
 
-    if snode in dist.keys():
-        del dist[snode]
-    if not len(dist.keys()):
-        return True
+    if snode in dist.keys(): del dist[snode]
+    if not len(dist.keys()): return True
 
-    item = sorted(dist.items(), key=lambda d: d[1])[0][0]
+    item = sorted(dist.items(), key=lambda d:d[1])[0][0]
     probe(item, enode)
 
 
@@ -48,8 +45,13 @@ def searchPath(snode, enode):
         searchPath(snode, path[enode])
         print "path %d=>%d" %(path[enode], enode)
 
-
 probe(2, 7)
 print(dist)
 print(path)
 searchPath(2, 7)
+
+
+
+
+
+
