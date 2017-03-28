@@ -30,11 +30,12 @@ class Graph(object):
         def dfs(node):
             self.visited[node] = True
             order.append(node)
+
             for nextNode in self.node_neighbors[node]:
                 if nextNode not in self.visited:
-                    dfs(nextNode)      
+                    dfs(nextNode)
         if root:
-            dfs(root)      
+            dfs(root)
         for n in self.nodes():
             if n not in self.visited:
                 dfs(n)
@@ -58,8 +59,8 @@ class Graph(object):
 
         if root:
             queue.append(root)
-            bfs()     
-        
+            bfs()
+
         for n in self.nodes():
             if n not in self.visited:
                 queue.append(n)
@@ -85,5 +86,5 @@ print "nodes:", g.nodes()
 
 g.breadth_first_search(1)
 g.clear_visit()
-g.depth_first_search(1)            
+g.depth_first_search(1)
 

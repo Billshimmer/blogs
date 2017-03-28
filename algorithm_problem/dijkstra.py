@@ -34,7 +34,6 @@ def probe(snode, enode):
     
     if snode in dist.keys(): del dist[snode]
     if not len(dist.keys()): return 
-
     item = sorted(dist.items(), key=lambda d:d[1])[0][0]
     probe(item, enode)
 
@@ -46,8 +45,13 @@ def searchPath(snode, enode):
        print "path %d=>%d" %(path[enode], enode)
 
 
-
 probe(2, 7)
 print dist
 print path
 searchPath(2, 7)
+
+
+
+
+
+
