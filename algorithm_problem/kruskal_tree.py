@@ -58,3 +58,6 @@ def checkUnion(edge):
 kruskal()
 for ((i,j), w) in edges_choosed:
     print "(%d,%d)边被选中, 权重为%d" %(i, j, w)
+
+
+    
