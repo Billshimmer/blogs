@@ -29,4 +29,4 @@ masquerade_address =""
 # 添加欢迎标题 主要是使用终端登录的查看用户
 welcom_banner = r"Welcome to private ftp."
 # 默认的匿名用户路径
-anonymous_path = r"/Test/"
+anonymous_path = r"/home/"

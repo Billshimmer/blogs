@@ -7,3 +7,4 @@ _site/
 _drafts/
 node_modules
 robots/images
+python_ftp/pyftp.log

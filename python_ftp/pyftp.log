@@ -144,3 +144,43 @@ INFO:pyftpdlib:127.0.0.1:56033-[root] CWD /home 250
 INFO:pyftpdlib:127.0.0.1:56033-[root] FTP session closed (disconnect).
 INFO:pyftpdlib:received interrupt signal
 INFO:pyftpdlib:>>> shutting down FTP server (1 active socket fds) <<<
+INFO:pyftpdlib:>>> starting FTP server on 0.0.0.0:21, pid=5094 <<<
+INFO:pyftpdlib:concurrency model: async
+INFO:pyftpdlib:masquerade (NAT) address: 
+INFO:pyftpdlib:passive ports: 2223->2232
+INFO:pyftpdlib:127.0.0.1:61136-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:61136-[] USER 'anonymous' failed login.
+INFO:pyftpdlib:127.0.0.1:61136-[] FTP session closed (disconnect).
+INFO:pyftpdlib:127.0.0.1:61186-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:61186-[root] USER 'root' logged in.
+INFO:pyftpdlib:127.0.0.1:61186-[root] CWD /home 250
+INFO:pyftpdlib:127.0.0.1:61186-[root] FTP session closed (disconnect).
+INFO:pyftpdlib:127.0.0.1:61287-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:61287-[] USER 'anonymous' failed login.
+INFO:pyftpdlib:127.0.0.1:61287-[] FTP session closed (disconnect).
+INFO:pyftpdlib:127.0.0.1:61337-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:61337-[root] USER 'root' logged in.
+INFO:pyftpdlib:127.0.0.1:61337-[root] CWD /home 250
+INFO:pyftpdlib:127.0.0.1:61337-[root] FTP session closed (disconnect).
+INFO:pyftpdlib:received interrupt signal
+INFO:pyftpdlib:>>> shutting down FTP server (1 active socket fds) <<<
+INFO:pyftpdlib:>>> starting FTP server on 0.0.0.0:21, pid=5128 <<<
+INFO:pyftpdlib:concurrency model: async
+INFO:pyftpdlib:masquerade (NAT) address: 
+INFO:pyftpdlib:passive ports: 2223->2232
+INFO:pyftpdlib:127.0.0.1:61436-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:61436-[] USER 'anonymous' failed login.
+INFO:pyftpdlib:127.0.0.1:61436-[] FTP session closed (disconnect).
+INFO:pyftpdlib:127.0.0.1:61485-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:61485-[root] USER 'root' logged in.
+INFO:pyftpdlib:127.0.0.1:61485-[root] CWD /home 250
+INFO:pyftpdlib:127.0.0.1:61485-[root] FTP session closed (disconnect).
+INFO:pyftpdlib:127.0.0.1:61631-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:61631-[] USER 'anonymous' failed login.
+INFO:pyftpdlib:127.0.0.1:61631-[] FTP session closed (disconnect).
+INFO:pyftpdlib:127.0.0.1:61682-[] FTP session opened (connect)
+INFO:pyftpdlib:127.0.0.1:61682-[root] USER 'root' logged in.
+INFO:pyftpdlib:127.0.0.1:61682-[root] CWD /home 250
+INFO:pyftpdlib:127.0.0.1:61682-[root] FTP session closed (disconnect).
+INFO:pyftpdlib:received interrupt signal
+INFO:pyftpdlib:>>> shutting down FTP server (1 active socket fds) <<<
