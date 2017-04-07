@@ -31,14 +31,11 @@ function MyPromise(executor) {
             self.data = data;
 
             //异步执行
-            setTimeout(
-                function () {
-                    for (var i = 0; i < self.onResolvedCallback.length; i++) {
-                        self.onResolvedCallback[i](data);
-                    }
-                },
-                0
-            );
+            process.nextTick(function() {
+                for (var i = 0; i < self.onResolvedCallback.length; i++) {
+                    self.onResolvedCallback[i](data);
+                }
+            });
         }
     }
 
@@ -47,14 +44,11 @@ function MyPromise(executor) {
             self.status = STATUS.REJECTED;
             self.data = data;
 
-            setTimeout(
-                function () {
-                    for (var i = 0; i < self.onRejectedCallback.length; i++) {
-                        self.onRejectedCallback[i](data);
-                    }
-                },
-                0
-            );
+            process.nextTick(function() {
+                for (var i = 0; i < self.onRejectedCallback.length; i++) {
+                    self.onRejectedCallback[i](data);
+                }
+            });
         }
     }
 
@@ -65,21 +59,23 @@ function MyPromise(executor) {
     }
 }
 
-MyPromise.prototype.then = function (onResolved, onRejected) {
-    var self = this,
-        promise2;
+MyPromise.prototype.then = function(onResolved, onRejected) {
+    var self = this, promise2;
 
-    typeof onResolved == 'function' ? onResolved : (function (value) {
-        return value;
-    });
-    typeof onRejected == 'function' ? onRejected : (function (error) {
-        throw error;
-    });
+    typeof onResolved == 'function'
+        ? onResolved
+        : (function(value) {
+              return value;
+          });
+    typeof onRejected == 'function'
+        ? onRejected
+        : (function(error) {
+              throw error;
+          });
 
     if (self.status === STATUS.PENDING) {
-        return promise2 = new MyPromise(function (resolve, reject) {
-
-            self.onResolvedCallback.push(function () {
+        return promise2 = new MyPromise(function(resolve, reject) {
+            self.onResolvedCallback.push(function() {
                 var x = onResolved(self.data);
                 if (x instanceof MyPromise) {
                     x.then(resolve, reject);
@@ -87,46 +83,49 @@ MyPromise.prototype.then = function (onResolved, onRejected) {
                 resolve(x);
             });
 
-            self.onRejectedCallback.push(function () {
+            self.onRejectedCallback.push(function() {
                 var x = onRejected(self.data);
                 if (x instanceof MyPromise) {
                     x.then(resolve, reject);
                 }
                 reject(x);
             });
-
         });
     }
 
     if (self.status === STATUS.RESOLVED) {
-        return promise2 = new MyPromise(function (resolve, reject) {
-            try {
-                var x = onResolved(self.data);
-                if (x instanceof MyPromise) {
-                    x.then(resolve, reject);
+        return promise2 = new MyPromise(function(resolve, reject) {
+            process.nextTick(function() {
+                try {
+                    var x = onResolved(self.data);
+                    if (x instanceof MyPromise) {
+                        x.then(resolve, reject);
+                    }
+                    resolve(x);
+                } catch (e) {
+                    reject(e);
                 }
-                resolve(x);
-            } catch (e) {
-                reject(e);
-            }
+            });
         });
     }
 
     if (self.status === STATUS.REJECTED) {
-        return promise2 = new MyPromise(function (resolve, reject) {
-            try {
-                var x = onRejected(self.data);
-                if (x instanceof MyPromise) {
-                    x.then(resolve, reject);
+        return promise2 = new MyPromise(function(resolve, reject) {
+            process.nextTick(function() {
+                try {
+                    var x = onRejected(self.data);
+                    if (x instanceof MyPromise) {
+                        x.then(resolve, reject);
+                    }
+                } catch (e) {
+                    reject(e);
                 }
-            } catch (e) {
-                reject(e);
-            }
+            });
         });
     }
 };
 
-MyPromise.prototype.catch = function (reject) {
+MyPromise.prototype.catch = function(reject) {
     this.then(null, reject);
 };
 
