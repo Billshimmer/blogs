@@ -16,6 +16,7 @@ def lengthOfLIS(nums):
         tails[i] = x
         if i == size:
             size += 1
+        print tails
     return size
 
 def AlengthOfLIS(nums):
