@@ -15,20 +15,17 @@ class Solution(object):
             for j in range(n):
                 if matrix[i][j] == 0:
                     checked_m[i], checked_n[j] = False, False
-                    break
 
         for i in range(0, m, 1):
             for j in range(0, n, 1):
                 if checked_m[i] == False or checked_n[j] == False:
                     matrix[i][j] = 0
-
+        
+        print checked_m, checked_n
         return matrix
 
 print Solution().setMatrixZeroes(
     [
-        [1, 0, 1, 1],
-        [1, 1, 0, 1],
-        [1, 1, 1, 0],
-        [1, 1, 1, 1]
+        [0,0,0,5],[4,3,1,4],[0,1,1,4],[1,2,1,3],[0,0,1,1]
     ]
 )
