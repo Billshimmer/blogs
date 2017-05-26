@@ -11,7 +11,7 @@ class Solution(object):
             return False
         if len(matrix[0]) == 0:
             return False
-            
+
         m, n = len(matrix), len(matrix[0])
         l, h = 0, m * n - 1
 
@@ -29,5 +29,4 @@ class Solution(object):
 print Solution().searchMatrix(
     0,
     [[1, 1]]
-
 )
