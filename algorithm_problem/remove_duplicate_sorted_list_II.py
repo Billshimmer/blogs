@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # -*- coding: latin-1 -*-
 
-# leetcode 81
+# leetcode 82
+
 class ListNode(object):
     def __init__(self, x):
         self.val = x
@@ -18,13 +19,17 @@ class Solution(object):
         pre = result
         cur = result.next
 
-        while cur != None:
+        while cur:
             while cur.next and cur.next.val == pre.next.val:
                 cur = cur.next
-            if pre.next == cur
+            if pre.next == cur.next:
                 pre = pre.next
             else:
-                pre.next = cur.next
+                pre.next = cur.next    
             cur = cur.next
+        
+        return result
+        
+        
 
         return result
