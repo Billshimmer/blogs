@@ -20,8 +20,7 @@ class Solution(object):
                 w = i - stack[-1] - 1
                 result = max(result, w * h)
             stack.append(i)
-        
         return result
 
 
-print Solution().largestRectangleArea([2,1,1,3])
+print Solution().largestRectangleArea([2, 1, 1, 3, 2, 2, 2, 2, 1, 2])
