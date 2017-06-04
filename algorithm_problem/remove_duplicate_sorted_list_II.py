@@ -12,7 +12,7 @@ class Solution(object):
     def removeDuplicatedSorted(self, head):
         if head == None or head.next == None:
             return head
-        
+
         result = ListNode(0)
         result.next = head
 
@@ -25,11 +25,7 @@ class Solution(object):
             if pre.next == cur.next:
                 pre = pre.next
             else:
-                pre.next = cur.next    
+                pre.next = cur.next
             cur = cur.next
-        
-        return result
-        
-        
 
         return result
