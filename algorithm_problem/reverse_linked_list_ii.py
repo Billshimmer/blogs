@@ -20,6 +20,7 @@ class Solution(object):
         while index < m:
             index += 1
             cur = cur.next
+            pre = pre.next
         while index <= n:
             stack.append(cur)
             index += 1
