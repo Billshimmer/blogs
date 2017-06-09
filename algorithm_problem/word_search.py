@@ -21,7 +21,6 @@ class Solution(object):
     def dfs(self, board, word, count, i, j, visited):
         if count == len(word) - 1:
             return True
-            
         
         visited[i][j] = 1
         m, n = len(board), len(board[0])

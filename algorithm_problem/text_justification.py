@@ -65,8 +65,8 @@ class Solution(object):
 
 
 text = Solution().textJustification(
-    ["a"],
-    1
+     ["This", "is", "an", "example", "of", "text", "justification."],
+    16
 )
 
 print text
