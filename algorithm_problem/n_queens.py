@@ -21,4 +21,4 @@ class Solution(object):
                 self.dfs(queens+[i], xy_dif+[i-j], xy_sum+[i+j], res, n)
 
 if __name__ == "__main__":
-    print(Solution().solveQueen(8))
+    print(Solution().solveQueen(1))
