@@ -7,13 +7,20 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        nums = [nums[i] for i in range(len(nums)) if nums[i] > 0]
-        if len(nums) == 0 : return 1
-        nums = list(set(nums))
-        nums.sort()
-        for i in range(0, len(nums), 1):
-            if nums[i] != i+1: return i+1
-        return len(nums) + 1
+        length = len(nums)
+        if length == 0: return 1
+        for i in range(length):
+            target = nums[i]
+            while target <= length and target-1 >= 0 and nums[target-1] != target:
+                new_target = nums[target-1]
+                nums[target-1] = target
+                target = new_target
+                print target
+        print nums
+        for i in range(length):
+            if nums[i] != i + 1:
+                return i + 1
+        return length + 1
 
-s = Solution().firstMissingPositive([0,2,2,1,1])
+s = Solution().firstMissingPositive([2, 1])
 print s
