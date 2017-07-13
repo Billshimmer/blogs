@@ -5,4 +5,4 @@
 ### algorithm_sort => 常见的排序问题之python写法
 ### algorithm_problem => leetcode算法问题 解题思路借鉴: https://shenjie1993.gitbooks.io/leetcode-python
 ### robots => 爬取百度图片，糗事百科内容
-### https://nodeschool.io/zh-cn/#workshopper-list
+### node-in-action教程 https://nodeschool.io/zh-cn/#workshopper-list
