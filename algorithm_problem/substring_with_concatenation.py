@@ -9,7 +9,7 @@ class Solution(object):
         wordLength = len(words[0])
         wordsLength = len(words[0])*len(words)
         for i in words: wordDict[i] = wordDict[i] + 1 if i in wordDict else 1
-        
+
         result = []
         for i in range(wordLength):
             left, right = i, i
@@ -29,7 +29,7 @@ class Solution(object):
                     left = right
 
         return result
-        
+
 
 
 if __name__ == "__main__":

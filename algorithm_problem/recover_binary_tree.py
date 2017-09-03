@@ -13,7 +13,7 @@ class Solution(object):
         self.node1, self.node2 = None, None
         self.inorder(root)
         self.node1.val, self.node2.val = self.node2.val, self.node1.val
-    
+
     def inorder(self, node):
         if not node: return
         self.inorder(node.left)
@@ -26,7 +26,7 @@ class Solution(object):
                     self.node2 = node
         self.pre = node
         self.inorder(node.right)
-    
+
     def otherRecover(self, root):
         stack = []
         self.node1, self.node2 = None, None
