@@ -1,0 +1,9 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="TestAppTheme" parent="LABActivityTheme">
+        <item name="android:windowBackground">@android:color/holo_blue_bright</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+</resources>

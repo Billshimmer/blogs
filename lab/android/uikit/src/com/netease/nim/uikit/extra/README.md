@@ -1,0 +1,20 @@
+该文件夹内不属于或改造云信的uikit
+
+
+云信uikit更改内容
+1、MessageFragment 里注释了 初始化action的viedeo和Location
+2、修改了viewholder的image的layout布局文件，显示图片控件改为simpleDraweeView
+3、InputPanel 回调接口修改了
+4、MessageListPanel 在接受数据和发送数据时都添加了消息状态监听
+5、MessageListPanel 注释掉长按Item时部分弹框  prepareDialogItems
+6、更改大图查看的activity，使用photoDraweeView
+7、viewholderbase和viewholderText 的背景换了
+8、viewholderbase 的头像控件引用更改了，对应布局也改掉了
+9、注意，用户信息存储在在NimUserInfoCachee里（获取头像链接用），由️DataCacheManager管理。因此先调用DataCacheManager,再创建UserInfo，云信的DataCacheManager是在登陆的时候创建的，还设置了NImUikit.setAccount
+    因此在RN里的IMHelper里记得设置，这里的Demo暂且放在Aplication里
+10、DataCacheManager在调用buildCache方法时会去缓存头像文件，由于使用了SimpleDraweeView，所以缓存头像代码被注释了。
+11、InputPanel 里修改表情，并在MsgViewHlderText设置显示表情的显示。
+12、InputPanel 里的录音更改为环信的
+13、修改Action显示的高度：ActionsPagerAdapter和nim_message_activity_actions_layout 布局文件
+14、新增 TFragment和MessageFragment用来继承android.app.Fragmeng
+15、Extras添加环信的常量

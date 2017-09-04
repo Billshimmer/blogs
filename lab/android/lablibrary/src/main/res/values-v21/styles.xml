@@ -1,0 +1,16 @@
+<resources>
+
+    <style name="LABActivityTheme" parent="LABAppTheme">
+        <!--透明状态栏-->
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+        <!--透明导航栏-->
+        <!--<item name="android:windowTranslucentNavigation">true</item>-->
+
+        <!-- 可设置系统栏颜色 -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <!-- 设置状态栏为透明 -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+
+    </style>
+
+</resources>

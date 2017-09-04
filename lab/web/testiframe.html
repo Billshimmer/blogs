@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<!-- <meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> -->
+	<title>test</title>
+	<style type="text/css">
+		html, body {
+			width: 100%;
+			height: 100%;
+			padding: 0;
+			margin: 0;
+		}
+
+    .div1 {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    iframe {
+      border:none;
+      flex: 1;
+      align-self: stretch;
+    }
+	</style>
+</head>
+<body>
+  <div class="div1" >
+    <iframe
+      src="/Content/Edit/Index/category_id/275/id/1"
+      frameBorder="0"
+      scrolling="no"
+      onLoad="iframeOnLoad(this)"
+    >
+    </iframe>
+  </div>
+
+  <script>
+    function iframeOnLoad(iframe) {
+      console.log(iframe.contentWindow.document.body.scrollHeight);
+      //iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+    }
+  </script>
+
+</body>
+</html>

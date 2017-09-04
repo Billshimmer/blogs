@@ -1,0 +1,65 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+android {
+    compileSdkVersion rootProject.ext.COMPILE_SDK_VERSION
+    buildToolsVersion rootProject.ext.BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.MIN_SDK_VERSION
+        targetSdkVersion rootProject.ext.TARGET_SDK_VERSION
+    }
+    publishNonDefault true
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+
+        }
+    }
+}
+
+dependencies {
+    provided fileTree(include: ['*.jar'], dir: 'libs')
+    compile "com.android.support:appcompat-v7:${rootProject.ext.SUPPORT_VERSION}"
+    //    compile 'com.parse:parse-android:1.13.1'
+    //compile project(':lablibrary')
+    debugCompile project(path: ':lablibrary', configuration: 'debug')
+    releaseCompile 'com.lightappbuilder.lab4:lab-library:+'
+    //compile project(':uikit')
+    debugCompile project(path: ':uikit', configuration: 'debug')
+    releaseCompile 'com.lightappbuilder.lab4:uikit:+'
+}
+
+if (android.publishNonDefault) {
+    android.libraryVariants.all { variant ->
+        if (variant.name == android.defaultPublishConfig) {
+            def bundleTask = tasks["bundle${name.capitalize()}"]
+            artifacts {
+                archives(bundleTask.archivePath) {
+                    classifier null
+                    builtBy bundleTask
+                }
+            }
+        }
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri(rootProject.ext.repoOut))
+
+            pom.project {
+                name 'labim'
+                description "labim"
+
+                groupId 'com.lightappbuilder.lab4'
+                artifactId 'labim'
+                version '1.0.0'
+            }
+        }
+    }
+}

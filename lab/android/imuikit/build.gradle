@@ -1,0 +1,101 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+android {
+    compileSdkVersion rootProject.ext.COMPILE_SDK_VERSION
+    buildToolsVersion rootProject.ext.BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.MIN_SDK_VERSION
+        targetSdkVersion rootProject.ext.TARGET_SDK_VERSION
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
+        }
+
+        // Move the tests to tests/java, tests/res, etc...
+        instrumentTest.setRoot('tests')
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+
+    publishNonDefault true
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+        debug {
+
+        }
+    }
+}
+configurations.all{
+    resolutionStrategy{
+        force "com.android.support:appcompat-v7:${rootProject.ext.SUPPORT_VERSION}"
+    }
+}
+dependencies {
+    compile fileTree(include: '*.jar', dir: 'libs')
+    compile 'com.github.backustech.boxing:boxing-impl:master-SNAPSHOT'
+    compile('com.yalantis:ucrop:2.2.0') {
+        exclude group: 'com.android.support'
+        exclude group: 'com.squareup.okio'
+        exclude group: 'com.squareup.okhttp3'
+    }
+    compile "com.android.support:appcompat-v7:${rootProject.ext.SUPPORT_VERSION}"
+    compile "com.android.support:design:${rootProject.ext.SUPPORT_VERSION}"
+    compile 'com.facebook.fresco:fresco:0.11.0'
+    compile 'com.facebook.fresco:animated-gif:0.11.0'
+    compile 'me.relex:photodraweeview:1.1.2'
+    debugCompile project(path: ':lablibrary', configuration: 'debug')
+    releaseCompile 'com.lightappbuilder.lab4:lab-library:+'
+    //compile project(':lablibrary')
+}
+if (android.publishNonDefault) {
+    android.libraryVariants.all { variant ->
+        if (variant.name == android.defaultPublishConfig) {
+            def bundleTask = tasks["bundle${name.capitalize()}"]
+            artifacts {
+                archives(bundleTask.archivePath) {
+                    classifier null
+                    builtBy bundleTask
+                }
+            }
+        }
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri(rootProject.ext.repoOut))
+
+            pom.project {
+                name 'imuikit'
+                description "imuikit"
+
+                groupId 'com.lightappbuilder.lab4'
+                artifactId 'imuikit'
+                version '1.0.0'
+            }
+        }
+    }
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="LABVideoActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- XXX 透明背景是为了使在播放视屏时尽量保证MainActivity不被释放 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+</resources>

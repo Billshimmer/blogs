@@ -1,0 +1,18 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lightappbuilder.lab4.lablibrary">
+
+    <application>
+
+        <activity
+            android:name=".startpagemgr.LABStartActivity"
+            android:theme="@style/LABStartActivityTheme"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:screenOrientation="portrait"
+            android:exported="false">
+        </activity>
+
+        <service android:name=".startpagemgr.LABStartPageUpdateService"/>
+    </application>
+
+</manifest>

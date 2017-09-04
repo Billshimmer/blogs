@@ -1,0 +1,10 @@
+/*web phone*/
+.lrnw-web-phone {
+  text-decoration: none;
+  color: inherit;
+}
+
+.lrnw-web-phone:active,
+.lrnw-web-phone:focus {
+  color: inherit;
+}

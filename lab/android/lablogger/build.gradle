@@ -1,0 +1,62 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+android {
+    compileSdkVersion rootProject.ext.COMPILE_SDK_VERSION
+    buildToolsVersion rootProject.ext.BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.MIN_SDK_VERSION
+        targetSdkVersion rootProject.ext.TARGET_SDK_VERSION
+        versionCode 1
+        versionName "1.0"
+    }
+    publishNonDefault true
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+
+        }
+    }
+}
+
+dependencies {
+//    provided fileTree(include: ['*.jar'], dir: 'libs')
+    compile "com.facebook.react:react-native:+"
+    provided 'com.tencent.bugly:crashreport_upgrade:latest.release'
+}
+
+if (android.publishNonDefault) {
+    android.libraryVariants.all { variant ->
+        if (variant.name == android.defaultPublishConfig) {
+            def bundleTask = tasks["bundle${name.capitalize()}"]
+            artifacts {
+                archives(bundleTask.archivePath) {
+                    classifier null
+                    builtBy bundleTask
+                }
+            }
+        }
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri(rootProject.ext.repoOut))
+
+            pom.project {
+                name 'lablogger'
+                description "lablogger"
+
+                groupId 'com.lightappbuilder.lab4'
+                artifactId 'lablogger'
+                version '1.0.0'
+            }
+        }
+    }
+}
+

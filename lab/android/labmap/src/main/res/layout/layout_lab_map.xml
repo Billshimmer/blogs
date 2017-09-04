@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.baidu.mapapi.map.TextureMapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <ImageButton
+        android:id="@+id/lab_map_btn_location"
+        android:visibility="invisible"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="left|bottom"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/bg_locate_btn_selector"
+        android:clickable="true"
+        android:gravity="center"
+        android:scaleType="centerInside"
+        android:src="@drawable/drawable_rg_ic_locate_car_point"/>
+</merge>

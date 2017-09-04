@@ -1,0 +1,24 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '8.0'
+
+pod 'React', :subspecs => [
+  'Core',
+  'RCTActionSheet',
+  'RCTGeolocation',
+  'RCTImage',
+  'RCTLinkingIOS',
+  'RCTNetwork',
+  'RCTSettings',
+  'RCTText',
+  'RCTVibration',
+  'RCTWebSocket',
+], :path => '../node_modules/react-native'
+
+pod 'LAB4', :subspecs => [
+'LABLibrary', 'Push'
+], :path => '../node_modules/lab4/ios'
+
+target '<%= name %>' do
+
+
+end

@@ -1,0 +1,130 @@
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Actions.md
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "1.111.0"
+
+default_platform :ios
+
+# export_method 支持的参数有 app-store, ad-hoc, package, enterprise, development, and developer-id.
+
+platform :ios do
+  before_all do
+    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
+    # cocoapods
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    scan
+  end
+
+  desc "install all dev pp file"
+  lane :enableDev do
+    cert
+    sigh(
+        force: true,
+        development: true
+    )
+  end
+
+  desc "Submit a new Beta Build to Apple TestFlight"
+  desc "This will also make sure the profile is up to date"
+  lane :beta do
+    # match(type: "appstore") # more information: https://codesigning.guide
+    gym # Build your app - more options available
+    pilot
+
+    # sh "your_script.sh"
+    # You can also use other beta testing services here (run `fastlane actions`)
+  end
+
+  desc "Deploy a new version to the App Store"
+  lane :release do
+    # match(type: "appstore")
+    # snapshot
+    gym # Build your app - more options available
+    deliver(force: true)
+    # frameit
+  end
+
+  # archive
+  lane :archive do |options|
+
+    time = Time.new.strftime("%Y-%m-%d-%H-%M")
+    path = options[:odir]
+    name = options[:module] + '-' + options[:type] + '-' + options[:version] + '-' + time + '-' + options[:code]
+    target = options[:module]
+    type = options[:type]
+    workspace = options[:workspace]
+
+    puts "workspace is " + workspace
+    puts "time is " + time
+    puts "path is " + path
+    puts "name is " + name
+    puts "target is " + target
+    puts "type is " + type
+
+    cert
+    sigh(
+        force: true
+    )
+
+    infoPlistPath = "../" + options[:module] + "/Info.plist"
+    infoPlistkey = "CFBundleShortVersionString"
+    theValue = options[:version]
+
+    puts "path is " + infoPlistPath
+    puts "key is " + infoPlistkey
+    puts "value is " + theValue
+
+    # /usr/libexec/PlistBuddy -c set:"CFBundleShortVersionString 1.2.2"  ../cxyh/Info.plist
+    system "/usr/libexec/PlistBuddy -c set:\"" + infoPlistkey + " " + theValue + "\"  " + infoPlistPath
+
+    gym(
+        workspace: workspace,
+        scheme: target,
+        clean: true,
+        output_directory: path,
+        output_name: name,
+        configuration: type,
+        silent: true,
+        include_symbols: false,
+        include_bitcode: false,
+        # use_legacy_build_api: true,
+        export_method: "enterprise"
+    )
+  end
+
+
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+
+    # slack(
+    #   message: "Successfully deployed new App Update."
+    # )
+  end
+
+  error do |lane, exception|
+    # slack(
+    #   message: exception.message,
+    #   success: false
+    # )
+  end
+end
+
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Actions.md
+
+# fastlane reports which actions are used
+# No personal data is recorded. Learn more at https://github.com/fastlane/enhancer

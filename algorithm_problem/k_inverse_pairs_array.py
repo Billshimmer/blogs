@@ -23,4 +23,4 @@ class Solution(object):
 
 
 if __name__ == "__main__":
-    print Solution().inverse_pairs_array(3, 2)
+    print Solution().inverse_pairs_array(2, 2)

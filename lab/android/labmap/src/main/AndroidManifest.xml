@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lightappbuilder.lab4.labmap">
+
+    <application
+        android:allowBackup="true">
+
+    </application>
+
+</manifest>

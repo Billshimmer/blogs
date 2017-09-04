@@ -1,0 +1,32 @@
+<resources>
+
+    <style name="LABAppTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <!-- 启动Activity主题 -->
+    <style name="LABStartActivityTheme" parent="LABAppTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!-- 主Activity的主题 -->
+    <style name="LABActivityTheme" parent="LABAppTheme">
+
+    </style>
+
+    <!-- 主Activity 带splash背景的主题 -->
+    <style name="LABSplashActivityTheme" parent="LABActivityTheme">
+        <item name="android:windowBackground">@drawable/lab_splash</item>
+    </style>
+
+    <style name="LABSplashDialogTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowAnimationStyle">@style/LABSplashDialogAnimationFade</item>
+    </style>
+
+    <style name="LABSplashDialogAnimationFade">
+        <item name="android:windowExitAnimation">@anim/lab_splash_dialog_fade_out</item>
+    </style>
+
+</resources>

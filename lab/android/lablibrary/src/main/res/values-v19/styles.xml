@@ -1,0 +1,12 @@
+<resources>
+
+    <style name="LABStartActivityTheme" parent="LABAppTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--透明状态栏-->
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="LABActivityTheme" parent="LABAppTheme">
+    </style>
+
+</resources>

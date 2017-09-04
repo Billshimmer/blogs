@@ -1,0 +1,48 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.pingplusplus.android">
+
+    <!-- 通用权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission-sdk-23 android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission-sdk-23 android:name="android.permission.NFC" />
+
+    <application
+        android:allowBackup="true">
+        <!-- Ping++ sdk 由于activity-alias引用的Activity需申明在前面,所以使用WXPayEntryActivity的工程也需要设置PaymentActivity  -->
+        <!--<activity-->
+            <!--android:name="com.pingplusplus.android.PaymentActivity"-->
+            <!--android:configChanges="orientation|screenSize"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
+        <!-- 微信支付 sdk ，也是 Ping++ sdk 调用入口 需要使用微信支付的工程必须在工程的Manifest中添加 -->
+        <!--<activity-alias-->
+            <!--android:name=".wxapi.WXPayEntryActivity"-->
+            <!--android:exported="true"-->
+            <!--android:targetActivity="com.pingplusplus.android.PaymentActivity" />-->
+        <!-- 支付宝 sdk -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+
+        <!-- 银联支付 sdk TODO 将银联支付放入单独library -->
+        <!--<activity-->
+            <!--android:name="com.unionpay.uppay.PayActivity"-->
+            <!--android:configChanges="orientation|keyboardHidden|navigation|screenSize" />-->
+
+    </application>
+
+</manifest>

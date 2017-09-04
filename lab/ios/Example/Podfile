@@ -1,0 +1,34 @@
+platform :ios, '8.0'
+
+# Pods for LABLibrary  需要跟LAB4.podspec 中的一致
+#use_frameworks!
+
+target 'LAB4_Example' do
+    pod 'Yoga', :path => '../../node_modules/react-native/ReactCommon/yoga'
+    
+    pod 'React', :subspecs => [
+    'Core',
+    'RCTActionSheet',
+    'RCTGeolocation',
+    'RCTImage',
+    'RCTLinkingIOS',
+    'RCTNetwork',
+    'RCTSettings',
+    'RCTText',
+    'RCTVibration',
+    'RCTWebSocket',
+    ], :path => '../../node_modules/react-native'
+    
+    pod 'LAB4', :subspecs => [
+    'LABLibrary', 'LABMap', 'Push', 'Pay', 'UMengUShare/core', 'UMengUShare/wx', 'UMengUShare/qq', 'UMengUShare/wb', 'Welcome', 'LABLogger'
+    ], :path => '../'
+    
+    pod 'lab-camera', :path=> '../../node_modules/lab-camera'
+    pod 'lab-image-picker', :path => '../../node_modules/lab-image-picker'
+    pod 'RNVectorIcons', :path => '../../node_modules/react-native-vector-icons'
+
+  target 'LAB4_Tests' do
+    inherit! :search_paths
+    
+  end
+end

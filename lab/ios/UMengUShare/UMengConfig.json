@@ -1,0 +1,20 @@
+{
+  "UMeng": {
+    "Appkey": "xxxx",
+  },
+  "QQ": {
+    "AppKey": "",
+    "AppSecret": "",
+    "RedirectURL": "",
+  },
+  "WeChat": {
+    "AppKey": "",
+    "AppSecret": "",
+    "RedirectURL": "",
+  },
+  "Sina": {
+    "AppKey": "",
+    "AppSecret": "",
+    "RedirectURL": "",
+  }
+}

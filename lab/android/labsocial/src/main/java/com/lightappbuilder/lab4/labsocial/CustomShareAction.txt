@@ -1,0 +1,275 @@
+package com.lightappbuilder.lab4.labsocial;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import java.lang.reflect.Method;
+
+/**
+* Created by vice on 2016/8/18.
+*/
+public class CustomShareAction {
+
+   private View contentView;
+   private View viewCover;
+   private TableLayout tableLayout;
+
+   private Activity context = null;
+   private ShareAction shareAction;
+   private SHARE_MEDIA[] displaylist;
+
+   private PopupWindow popupWindow = null;
+
+   public CustomShareAction(Activity context, ShareAction shareAction, SHARE_MEDIA[] displaylist) {
+       this.shareAction = shareAction;
+       this.displaylist = displaylist;
+       this.context = context;
+   }
+
+   /**
+    * 打开分享面板
+    */
+   public void open() {
+       contentView = View.inflate(context, R.layout.share_displaylist_layout, null);
+       tableLayout = (TableLayout) contentView.findViewById(R.id.table_layout);
+       //用于让屏幕变暗
+       viewCover = contentView.findViewById(R.id.view_cover);
+       viewCover.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               close();
+           }
+       });
+
+
+       if (popupWindow == null) {
+           popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+       }
+       popupWindow.setBackgroundDrawable(new BitmapDrawable());
+       popupWindow.setOutsideTouchable(true);
+       popupWindow.setTouchable(true);
+       popupWindow.setFocusable(true);
+//        popupWindow.setAnimationStyle(R.style.umeng_socialize_shareboard_animation);
+
+       if (displaylist == null) {
+           return;
+       }
+
+       int platforms = displaylist.length;//显示的平台总数
+       int rows = platforms / 4 + 1;//行数
+       int cloums = 4;//列数
+
+       int num = 1;//用于标记当前显示的平台数量
+       for (int i = 1; i <= rows; i++) {
+
+           TableRow tableRow = new TableRow(context);
+           for (int j = 1; j <= cloums; j++) {
+               View platformItem = context.getLayoutInflater().inflate(R.layout.platform_item_layout, tableRow, false);
+               platformItem.getLayoutParams().height = getWindowWidth() / cloums;
+               platformItem.requestLayout();
+               tableRow.addView(platformItem);
+               if (num <= platforms) {
+                   Drawable drawable = context.getResources().getDrawable(R.drawable.umeng_socialize_shareboard_item_background);
+                   platformItem.setBackground(drawable);
+                   setPlatformInformations(num - 1, platformItem);
+               }
+               num += 1;
+           }
+           tableLayout.addView(tableRow);
+       }
+       View decorView = context.getWindow().getDecorView();
+       if (popupWindow != null) {
+           if (checkDeviceHasNavigationBar(context)) {
+               popupWindow.showAtLocation(decorView, Gravity.BOTTOM, 0, getNavigationBarHeight(context));
+               setInAnimation();
+//                context.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        backgroundAlpha(0.1f);
+//                    }
+//                });
+           } else {
+               popupWindow.showAtLocation(decorView, Gravity.BOTTOM, 0, 0);
+               setInAnimation();
+//                context.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        backgroundAlpha(0.1f);
+//                    }
+//                });
+           }
+       }
+   }
+
+   /**
+    * 退出
+    */
+   private void close() {
+       if (popupWindow != null) {
+           popupWindow.dismiss();
+       }
+       setOutAnimation();
+   }
+
+   /**
+    * 进入动画
+    */
+   private void setInAnimation() {
+       if (contentView != null) {
+           contentView.setAnimation(AnimationUtils.loadAnimation(context, R.anim.custom_shareboard_cover_animation_in));
+       }
+       if (tableLayout != null) {
+           tableLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.custom_shareboard_content_animation_in));
+       }
+   }
+
+   /**
+    * 退出动画
+    */
+   private void setOutAnimation() {
+       if (viewCover != null) {
+           contentView.setAnimation(AnimationUtils.loadAnimation(context, R.anim.umeng_socialize_shareboard_animation_out));
+       }
+   }
+
+   /**
+    * 设置每个平台的信息
+    *
+    * @param num
+    * @param platformItem
+    */
+   private void setPlatformInformations(final int num, View platformItem) {
+       SHARE_MEDIA platform = displaylist[num];
+
+       ImageView ivPlatform = (ImageView) platformItem.findViewById(R.id.iv_platform);
+       TextView tvName = (TextView) platformItem.findViewById(R.id.tv_name);
+
+       switch (platform) {
+           case SINA:
+               ivPlatform.setImageResource(R.drawable.umeng_socialize_sina_on);
+               tvName.setText(R.string.umeng_socialize_text_sina_key);
+               break;
+           case QQ:
+               ivPlatform.setImageResource(R.drawable.umeng_socialize_qq_on);
+               tvName.setText(R.string.umeng_socialize_text_qq_key);
+               break;
+           case QZONE:
+               ivPlatform.setImageResource(R.drawable.umeng_socialize_qzone_on);
+               tvName.setText(R.string.umeng_socialize_text_qq_zone_key);
+               break;
+           case WEIXIN:
+               ivPlatform.setImageResource(R.drawable.umeng_socialize_wechat);
+               tvName.setText(R.string.umeng_socialize_text_weixin_key);
+               break;
+           case WEIXIN_CIRCLE:
+               ivPlatform.setImageResource(R.drawable.umeng_socialize_wxcircle);
+               tvName.setText(R.string.umeng_socialize_text_weixin_circle_key);
+               break;
+           case WEIXIN_FAVORITE:
+               ivPlatform.setImageResource(R.drawable.wechat_fav);
+               tvName.setText(R.string.umeng_socialize_text_weixin_fav_key);
+               break;
+           case SMS:
+               ivPlatform.setImageResource(R.drawable.umeng_socialize_sms_on);
+               tvName.setText(R.string.umeng_socialize_sms);
+               break;
+           //TODO 后续平台的添加
+
+       }
+
+       if (platformItem != null) {
+           platformItem.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   shareAction.setPlatform(displaylist[num]);
+                   shareAction.share();
+                   if (popupWindow != null) {
+                       popupWindow.dismiss();
+                   }
+               }
+           });
+       }
+   }
+
+   /**
+    * 获取NavigationBar的高度
+    *
+    * @param activity
+    * @return
+    */
+   private int getNavigationBarHeight(Activity activity) {
+       Resources resources = activity.getResources();
+       int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+
+       int height = resources.getDimensionPixelSize(resourceId);
+       return height;
+   }
+
+   /**
+    * 检测是否有导航栏
+    *
+    * @param context
+    * @return
+    */
+   private boolean checkDeviceHasNavigationBar(Context context) {
+       boolean hasNavigationBar = false;
+       Resources rs = context.getResources();
+       int id = rs.getIdentifier("config_showNavigationBar", "bool", "android");
+       if (id > 0) {
+           hasNavigationBar = rs.getBoolean(id);
+       }
+       try {
+           Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
+           Method m = systemPropertiesClass.getMethod("get", String.class);
+           String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
+           if ("1".equals(navBarOverride)) {
+               hasNavigationBar = false;
+           } else if ("0".equals(navBarOverride)) {
+               hasNavigationBar = true;
+           }
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+
+       return hasNavigationBar;
+
+   }
+
+   private int getWindowWidth() {
+       WindowManager wm = (WindowManager) context
+               .getSystemService(Context.WINDOW_SERVICE);
+
+       int width = wm.getDefaultDisplay().getWidth();
+       return width;
+   }
+
+
+   /**
+    * 屏幕透明度
+    *
+    * @param bgAlpha
+    */
+   public void backgroundAlpha(float bgAlpha) {
+       WindowManager.LayoutParams lp = context.getWindow().getAttributes();
+       lp.alpha = bgAlpha;
+       context.getWindow().setAttributes(lp);
+
+   }
+
+}
